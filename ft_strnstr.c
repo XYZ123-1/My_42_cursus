@@ -40,7 +40,3 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	return (0);
 }
 
-int	main()
-{
-	printf("%s", strnstr("Le monde est devenus mechant", "monde", 15));
-}
