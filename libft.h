@@ -6,7 +6,7 @@
 /*   By: jrabenah <jrabenah@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 12:37:37 by jrabenah          #+#    #+#             */
-/*   Updated: 2025/03/10 11:29:35 by jrabenah         ###   ########.fr       */
+/*   Updated: 2025/03/11 07:15:09 by jrabenah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,13 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_itoa(int n);
+void	ft_striteri(char *s, void (*f)(unsigned int, char*));
+void	ft_putchar_fd(char c, int fd);
+void	ft_putstr_fd(char *s, int fd);
+void	ft_putendl_fd(char *s, int fd);
+void	ft_putnbr_fd(int n, int fd);
 void	*ft_memchr(const void *s, int c, size_t n);
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	*ft_memset(void *dest, int c, size_t size);
 void	*ft_memcpy(void *s1, const void *s2, size_t n);
 void	ft_bzero(void *s, size_t n);

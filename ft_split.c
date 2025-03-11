@@ -6,11 +6,11 @@
 /*   By: jrabenah <jrabenah@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 13:45:58 by jrabenah          #+#    #+#             */
-/*   Updated: 2025/03/10 09:20:22 by jrabenah         ###   ########.fr       */
+/*   Updated: 2025/03/11 07:27:48 by jrabenah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 #include <stdlib.h>
 
 static int	ft_check_sep(char s, char c)
@@ -68,7 +68,6 @@ static char	*ft_word(char const *s, char c)
 	word[i] = '\0';
 	return (word);
 }
-
 
 char	**ft_split(char const *s, char c)
 {
