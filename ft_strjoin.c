@@ -6,46 +6,71 @@
 /*   By: jrabenah <jrabenah@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 09:37:07 by jrabenah          #+#    #+#             */
-/*   Updated: 2025/03/08 10:24:39 by jrabenah         ###   ########.fr       */
+/*   Updated: 2025/03/13 09:18:42 by jrabenah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-static char	*ft_strncat(char const *dest, char const *src, size_t nb)
+static char	*ft_strcpy(char const *dest, char const *src)
 {
-	size_t	i;
-	size_t	j;
-	size_t	len_d;
-	char	*dest_cast;
+	int		i;
+	char	*d;
+	char	*s;
 
 	i = 0;
-	j = i;
-	dest_cast = (char *)dest;
-	len_d = ft_strlen(dest);
-	while (src[i] != '\0' && i < nb)
+	d = (char *)dest;
+	s = (char *)src;
+	while (s[i])
 	{
-		dest_cast[len_d + i] = src[i];
+		d[i] = s[i];
 		i++;
 	}
-	dest_cast[len_d + i] = '\0';
-	return (dest_cast);
+	d[i] = '\0';
+	return (d);
+}
+
+static char	*ft_strcat(char const *dest, char const *src)
+{
+	int		i;
+	int		j;
+	char	*d;
+	char	*s;
+
+	j = 0;
+	i = 0;
+	d = (char *)dest;
+	s = (char *)src;
+	while (*(d + j))
+	{
+		j++;
+	}
+	while (*(s + i))
+	{
+		*(d + j) = *(s + i);
+		j++;
+		i++;
+	}
+	d[j] = '\0';
+	return (d);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*nptr;
-	int		i;
+	size_t	i;
+	size_t	j;
 
-	nptr = malloc(sizeof * nptr * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	i = 0;
+	i = ft_strlen(s1);
+	j = ft_strlen(s2);
+	nptr = malloc(sizeof * nptr * (i + j + 1));
 	if (!nptr)
 		return (NULL);
-	else
+	if (nptr)
 	{
-		ft_strncat(nptr, s1, ft_strlen(s1));
-		ft_strncat(nptr, s2, ft_strlen(s2));
+		ft_strcpy(nptr, s1);
+		ft_strcat(nptr, s2);
 	}
 	return (nptr);
 }

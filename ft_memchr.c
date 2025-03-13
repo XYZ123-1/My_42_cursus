@@ -6,7 +6,7 @@
 /*   By: jrabenah <jrabenah@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:48:45 by jrabenah          #+#    #+#             */
-/*   Updated: 2025/03/07 06:54:52 by jrabenah         ###   ########.fr       */
+/*   Updated: 2025/03/13 06:56:00 by jrabenah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	i = 0;
 	while (i < n)
 	{
-		if (p[i] == c)
+		if ((c >= 256 && p[i] == c % 256) || (p[i] == c))
 			return (&p[i]);
 		i++;
 	}
