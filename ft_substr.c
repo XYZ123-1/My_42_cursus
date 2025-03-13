@@ -6,7 +6,7 @@
 /*   By: jrabenah <jrabenah@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 09:17:22 by jrabenah          #+#    #+#             */
-/*   Updated: 2025/03/13 11:15:19 by jrabenah         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:05:39 by jrabenah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,25 @@ static char	*ft_strncpy(char *dest, char const *src, size_t n)
 	return (dest);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
-	unsigned int		src_len;
-	char				*nptr;
+	size_t	src_len;
+	char	*nptr;
 
 	src_len = ft_strlen(s);
 	if (!s || start < 0 || len < 0)
+	{
 		return (NULL);
-	if (start >= src_len)
-		return (NULL);
-	if (start + len > src_len)
+	}
+	if (start > src_len || len == 0)
+	{
+		nptr = malloc(sizeof * nptr * 1);
+		if (!nptr)
+			return (NULL);
+		nptr[0] = '\0';
+		return (nptr);
+	}
+	if (len > src_len - start)
 		len = src_len - start;
 	nptr = malloc(sizeof * nptr * (len + 1));
 	if (!nptr)
