@@ -6,7 +6,7 @@
 /*   By: jrabenah <jrabenah@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 08:40:37 by jrabenah          #+#    #+#             */
-/*   Updated: 2025/03/10 11:44:04 by jrabenah         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:37:50 by jrabenah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,13 @@ char	*ft_itoa(int n)
 
 	m = n;
 	len = ft_word_len(m);
-	str = malloc (sizeof * str * (len + 1));
+	str = malloc ((len + 1));
 	if (!str)
 		return (NULL);
-	str[len--] = '\0';
+	str[len] = '\0';
+	len--;
 	if (m == 0)
-		str[0] = 48;
+		return (ft_strdup("0"));
 	if (m < 0)
 	{
 		str[0] = 45;
