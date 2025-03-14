@@ -6,7 +6,7 @@
 /*   By: jrabenah <jrabenah@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 13:45:58 by jrabenah          #+#    #+#             */
-/*   Updated: 2025/03/11 07:27:48 by jrabenah         ###   ########.fr       */
+/*   Updated: 2025/03/14 06:58:56 by jrabenah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,29 @@ static int	ft_count_word(char const *s, char c)
 	return (cw);
 }
 
-static int	ft_strlen_sep(char const *s, char c)
+void	ft_free_memory(char **split, int len_split)
 {
 	int	i;
 
 	i = 0;
-	while (s[i] && !ft_check_sep(s[i], c))
+	while (i < len_split)
+	{
+		free(split[i]);
 		i++;
-	return (i);
+	}
+	free(split);
 }
 
-static char	*ft_word(char const *s, char c)
+static char	*ft_word(char const *s, int x)
 {
 	int		i;
-	int		len_word;
 	char	*word;
 
 	i = 0;
-	len_word = ft_strlen_sep(s, c);
-	word = malloc (sizeof * word * (len_word + 1));
+	word = malloc (sizeof * word * (x + 1));
 	if (!word)
 		return (NULL);
-	while (i < len_word)
+	while (i < x)
 	{
 		word[i] = s[i];
 		i++;
@@ -73,20 +74,22 @@ char	**ft_split(char const *s, char c)
 {
 	char	**split;
 	int		i;
-	int		cstring;
+	int		j;
 
 	i = 0;
-	cstring = ft_count_word(s, c);
-	split = malloc(sizeof * split * (cstring + 1));
+	split = malloc(sizeof * split * (ft_count_word(s, c) + 1));
 	if (!split)
 		return (NULL);
 	while (*s)
 	{
+		j = 0;
 		while (*s && ft_check_sep(*s, c))
 			s++;
+		while (s[j] && !ft_check_sep(s[j], c))
+			j++;
 		if (*s)
 		{
-			split[i] = ft_word(s, c);
+			split[i] = ft_word(s, (j));
 			i++;
 		}
 		while (*s && !ft_check_sep(*s, c))
