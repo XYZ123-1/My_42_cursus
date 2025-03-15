@@ -1,38 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrabenah <jrabenah@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/08 07:42:03 by jrabenah          #+#    #+#             */
-/*   Updated: 2025/03/13 09:20:12 by jrabenah         ###   ########.fr       */
+/*   Created: 2025/03/14 07:18:51 by jrabenah          #+#    #+#             */
+/*   Updated: 2025/03/14 11:22:55 by jrabenah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
-#include <stdint.h>
 
-void	*ft_calloc(size_t nmemb, size_t size)
+t_list	*ft_lstnew(void *content)
 {
-	void	*nptr;
-	size_t	n;
+	t_list	*new_element;
 
-	if (nmemb == 0 || size == 0)
-		n = 0;
-	else
-	{
-		if (nmemb > SIZE_MAX / size)
-			return (NULL);
-		n = nmemb * size;
-	}
-	nptr = malloc(n);
-	if (!nptr)
-		return (NULL);
-	if (n != 0)
-	{
-		ft_memset(nptr, 0, n);
-	}
-	return (nptr);
+	new_element = malloc(sizeof * new_element);
+	if (!new_element)
+		return (0);
+	new_element->content = content;
+	new_element->next = NULL;
+	return (new_element);
 }

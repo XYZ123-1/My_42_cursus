@@ -6,72 +6,93 @@
 #    By: jrabenah <jrabenah@student.42antananari    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/06 12:12:39 by jrabenah          #+#    #+#              #
-#    Updated: 2025/03/13 16:55:24 by jrabenah         ###   ########.fr        #
+#    Updated: 2025/03/15 13:27:53 by jrabenah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-LDFLAGS =
 NAME = libft.a
-SRCS = ft_atoi.c\
-ft_bzero.c\
-ft_calloc.c\
-ft_isalnum.c\
-ft_isalpha.c\
-ft_isascii.c\
-ft_isdigit.c\
-ft_isprint.c\
-ft_itoa.c\
-ft_memchr.c\
-ft_memcmp.c\
-ft_memcpy.c\
-ft_memmove.c\
-ft_memset.c\
-ft_putchar_fd.c\
-ft_putendl_fd.c\
-ft_putnbr_fd.c\
-ft_putstr_fd.c\
-ft_split.c\
-ft_strchr.c\
-ft_strdup.c\
-ft_striteri.c\
-ft_strjoin.c\
-ft_strlcat.c\
-ft_strlcpy.c\
-ft_strlen.c\
-ft_strmapi.c\
-ft_strncmp.c\
-ft_strnstr.c\
-ft_strrchr.c\
-ft_strtrim.c\
-ft_substr.c\
-ft_tolower.c\
-ft_toupper.c\
+CC = cc
+CFLAGS = -Wall -Werror -Wextra
+AR = ar rcs
+SRC = ft_isalpha \
+	ft_isdigit \
+	ft_isalnum \
+	ft_isascii \
+	ft_isprint \
+	ft_strlen \
+	ft_memset \
+	ft_bzero \
+	ft_memcpy \
+	ft_memmove \
+	ft_strlcpy \
+	ft_strlcat \
+	ft_toupper \
+	ft_tolower \
+	ft_strchr \
+	ft_strrchr \
+	ft_strncmp \
+	ft_memchr \
+	ft_memcmp \
+	ft_strnstr \
+	ft_atoi \
+	ft_calloc \
+	ft_strdup \
+	ft_substr \
+	ft_strjoin \
+	ft_strtrim \
+	ft_split \
+	ft_itoa \
+	ft_strmapi \
+	ft_striteri \
+	ft_putchar_fd \
+	ft_putstr_fd \
+	ft_putendl_fd \
+	ft_putnbr_fd
+BONUS_SRC = ft_lstnew_bonus \
+	ft_lstadd_front_bonus \
+	ft_lstsize_bonus \
+	ft_lstlast_bonus \
+	ft_lstadd_back_bonus \
+	ft_lstdelone_bonus \
+	ft_lstclear_bonus \
+	ft_lstiter_bonus \
+	ft_lstmap_bonus  
 
-OBJS = $(SRCS:.c=.o)
-AR = ar
-RCS = rcs
-COLOR_BoldCyan = \033[1;36m
-COLOR_Reset = \033[0m
-COLOR_Red = \033[31m
+DEF_COLOR =		\033[0;39m
+RED =			\033[0;91m
+GREEN =			\033[0;92m
+BLUE =			\033[0;94m
+MAGENTA =		\033[0;95m
+CYAN =			\033[0;96m
+BROWN =			\033[38;2;184;143;29m
 
-all : $(NAME)
-
-$(NAME) : $(OBJS)
-	@$(AR) $(RCS) $@ $^
-	@echo "$(COLOR_BoldCyan)Librairy $(NAME) Created with success ..."
+SRCS = $(addsuffix .c, $(SRC))
+OBJS = $(addsuffix .o, $(SRC))
+BONUS_SRCS = $(addsuffix .c, $(BONUS_SRC))
+BONUS_OBJS = $(addsuffix .o, $(BONUS_SRC))
 
 %.o : %.c 
-	@$(CC) $(CFLAGS) -o $@ -c $< $(LDFLAGS)
+	@echo "${BLUE} ◎ $(BROWN)Compiling   ${MAGENTA}→   $(CYAN)$< $(DEF_COLOR)"
+	@$(CC) $(CFLAGS) -o $@ -c $<
 
-clean : 
-	@rm -rf $(OBJS)
-	@echo " $(COLOR_Red)The binary files are deleted ..."
+$(NAME): $(OBJS)
+	@$(AR) $@ $^
+	@echo "\n$(GREEN) Created $(NAME) ✓ $(DEF_COLOR)\n"
 
-fclean : clean
-	@rm -rf $(NAME)
-	@echo " $(COLOR_Red)The librairy file are deleted ..."
-re : fclean all
-	@echo " $(COLOR_Reset)Recompilation successfully completed ..."
-.PHONY :all clean fclean re
+bonus: $(OBJS) $(BONUS_OBJS)
+	@$(AR) $(NAME) $^
+	@echo "\n${GREEN} Bonus compiled successfully ✓ $(DEF_COLOR)\n"
+
+all: $(NAME)
+
+clean:
+	@rm -f *.o
+	@echo "\n${BLUE} ◎ $(RED)All objects cleaned successfully ${BLUE}◎$(DEF_COLOR)"
+
+fclean: clean
+	@rm -f $(NAME)
+	@echo "${BLUE} ◎ $(RED)Executable cleaned successfully${BLUE} ◎$(DEF_COLOR)\n"
+
+re: clean all
+
+.PHONY: all clean fclean re bonus

@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrabenah <jrabenah@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/08 07:42:03 by jrabenah          #+#    #+#             */
-/*   Updated: 2025/03/13 09:20:12 by jrabenah         ###   ########.fr       */
+/*   Created: 2025/03/14 11:13:03 by jrabenah          #+#    #+#             */
+/*   Updated: 2025/03/15 15:08:31 by jrabenah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
-#include <stdint.h>
 
-void	*ft_calloc(size_t nmemb, size_t size)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	void	*nptr;
-	size_t	n;
+	t_list	*new_list;
+	t_list	*new_node;
+	t_list	*tmp;
+	void	*content;
 
-	if (nmemb == 0 || size == 0)
-		n = 0;
-	else
+	new_list = NULL;
+	tmp = lst;
+	while (tmp)
 	{
-		if (nmemb > SIZE_MAX / size)
+		content = f(tmp->content);
+		new_node = malloc(sizeof * new_node);
+		if (!new_node)
+		{
+			ft_lstclear(&new_list, del);
 			return (NULL);
-		n = nmemb * size;
+		}
+		new_node->content = content;
+		new_node->next = NULL;
+		ft_lstadd_back(&new_list, new_node);
+		tmp = tmp->next;
 	}
-	nptr = malloc(n);
-	if (!nptr)
-		return (NULL);
-	if (n != 0)
-	{
-		ft_memset(nptr, 0, n);
-	}
-	return (nptr);
+	return (new_list);
 }
